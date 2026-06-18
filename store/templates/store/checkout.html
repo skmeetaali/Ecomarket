@@ -5,22 +5,63 @@
 <div class="row">
 
     <div class="col-lg-6">
-        <div class="box-element"  id="form-wrapper">
+        <div class="box-element" id="form-wrapper">
             <form action="">
                 <div id="user-info">
-
+                    <div class="form-field">
+                        <input type="text" name="name" placeholder="name" class="form-control" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="email" name="email" placeholder="email" class="form-control" required>
+                    </div>
                 </div>
-                <div id="shipping-info">
 
+                <div id="shipping-info">
+                    <hr>
+                    <p>Shipping Information:</p>
+                    <div class="form-field">
+                        <input type="text" name="address" placeholder="Address" class="form-control">
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="city" placeholder="City" class="form-control">
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="name" placeholder="State" class="form-control">
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="state" placeholder="name" class="form-control">
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="zipcode" placeholder="zipcode" class="form-control">
+                    </div>
                 </div>
                 <br>
-                <button class="btn btn-dark" value="Continue" type="submit"></button>
+                <input type="submit" id="form-button" class="btn btn-success btn-block" value="Continue"
+                    style="width: 100%;">
             </form>
+        </div>
+
+        <div class="box-element hidden" id="payment-info">
+            <small>Papal options</small>
+
         </div>
     </div>
     <div class="col-lg-6">
         <div class="box-element">
-
+            <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+            <hr>
+            <h3>Order summary</h3>
+            <hr>
+            <div class="cart-row">
+                <div style="flex: 2;"><img style="top: 0;" class="row-image" src="{% static 'images/no-img.webp' %}"
+                        alt="product-img"></div>
+                <div style="flex: 2;">Item</div>
+                <div style="flex: 1;">Price</div>
+                <div style="flex: 1;">$45</div>
+                <div style="flex: 1;">2</div>
+            </div>
+            <h5>Item : 2</h5>
+            <h5>Total: $90</h5>
         </div>
     </div>
 
