@@ -23,4 +23,5 @@ urlpatterns = [
     path("home/", views.home, name="home"),
     path("", include('store.urls')),
     path("accounts/", include('accounts.urls')),
+    path("products/", include('products.urls')),
 ]
