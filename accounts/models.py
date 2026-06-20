@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your views here.
 
@@ -15,10 +14,10 @@ class User(AbstractUser):
         default=Role.BUYER
     )
     
-    phone_number = PhoneNumberField()    
     profile_picture = models.ImageField(null=True, blank=True)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()
+    email = models.EmailField(primary_key=True, unique=True)
     
     
     
