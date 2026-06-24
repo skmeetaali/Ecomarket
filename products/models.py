@@ -17,7 +17,6 @@ class Product(models.Model):
         return self.product_name  
     
 class Product_picturs(models.Model):
-    product_id = models.ForeignKey(Product, primary_key=True, on_delete=models.CASCADE)
     picture = models.ImageField()
     is_default = models.BooleanField(default=False)
     

@@ -15,10 +15,10 @@ class User(AbstractUser):
     )
     
     profile_picture = models.ImageField(null=True, blank=True)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     email = models.EmailField(primary_key=True, unique=True)
-    
+
     
     
 class Buyer(models.Model):
