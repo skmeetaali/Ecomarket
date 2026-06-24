@@ -1,5 +1,5 @@
 from . import views
 
 urlpatterns = [
-
+    
 ]
