@@ -4,7 +4,6 @@ from accounts.models import Seller
 # Create your models here.
 class Product(models.Model):
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
-    product_id = models.UUIDField(primary_key=True)
     product_name = models.CharField(max_length=128, unique=True, blank = True, null = True)
     brancd = models.CharField(max_length=64, blank = True, null = True)
     price = models.FloatField(blank=True)

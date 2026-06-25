@@ -4,10 +4,12 @@
 {% block content %}
 
 <div class="row">
+
+{% for product in products %}
     <div class="col-lg-4">
         <img class="thumbnail" src="{% static 'images/no-img.webp' %}" alt="">
         <div class="box-element product">
-            <h5><strong>Product</strong></h5>
+            <h5><strong>{{product.name}}</strong></h5>
             <hr>
             <button class="btn btn-outline-secondary add-button">Add to cart</button>
             <a class="btn btn-outline-success" href="#">View</a>
@@ -15,28 +17,7 @@
 
         </div>
     </div>
-
-    <div class="col-lg-4">
-        <img class="thumbnail" src="{% static 'images/no-img.webp' %}" alt="">
-        <div class="box-element product">
-            <h5><strong>Product</strong></h5>
-            <hr>
-            <button class="btn btn-outline-secondary add-button">Add to cart</button>
-            <a class="btn btn-outline-success" href="#">View</a>
-            <h4 style="float: right;">$20</h4>
-        </div>
-    </div>
-
-    <div class="col-lg-4">
-        <img class="thumbnail" src="{% static 'images/no-img.webp' %}" alt="">
-        <div class="box-element product">
-            <h5><strong>Product</strong></h5>
-            <hr>
-            <button class="btn btn-outline-secondary add-button">Add to cart</button>
-            <a class="btn btn-outline-success" href="#">View</a>
-            <h4 style="float: right;">$20</h4>
-        </div>
-    </div>
+{% endfor %}
 </div>
 
 {% endblock %}
