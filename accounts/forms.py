@@ -4,4 +4,4 @@ from django.contrib.auth.forms import UserCreationForm
 class UserSigninForm(UserCreationForm):
     class Meta:
         model = User 
-        fields = ["email","username","password"]
+        fields = ["username", "email", "role", "password1", "password2"]
