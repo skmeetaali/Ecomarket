@@ -20,7 +20,7 @@ class Cart(models.Model):
     
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0, blank=True,null=False)
     selected = models.BooleanField(default=True)
     added_at = models.DateTimeField(auto_now_add=True)
