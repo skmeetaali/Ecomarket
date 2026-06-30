@@ -1,1 +1,36 @@
-{% extends './main.html' %}
+{% extends "./main.html" %}
+{% load static %}
+
+{% block title %}Buyer Profile{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+<form method="post" enctype="multipart/form-data" class="signup-form">
+    {% csrf_token %}
+
+    <h3 class="text-center mb-3">Complete Your Buyer Profile</h3>
+    <p class="text-center text-muted">
+        Tell us a little about yourself.
+    </p>
+
+    <div class="form-group">
+        {{ form.birth_date.label_tag }}
+        {{ form.birth_date }}
+        {{ form.birth_date.errors }}
+    </div>
+
+    <div class="form-group">
+        {{ form.profile_picture.label_tag }}
+        {{ form.profile_picture }}
+        {{ form.profile_picture.errors }}
+    </div>
+
+    <button type="submit" class="btn-submit">
+        Complete Profile
+    </button>
+
+</form>
+
+{% endblock %}
