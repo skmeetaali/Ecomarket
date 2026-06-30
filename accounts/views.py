@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import UserSigninForm, BuyerSignupForm, LoginForm
+from .forms import UserSigninForm, BuyerSignupForm, LoginForm, SellerSignupForm
 from .models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 
 def signup(request):
     print(request.method)
@@ -33,13 +33,33 @@ def buyer_signup(request):
             buyer = form.save(commit=False)
             buyer.user = user
             buyer.save()
-
+            logout(request)
             return redirect("login")
 
     else:
         form = BuyerSignupForm()
 
     return render(request, "registration/buyer_signup.html", {"form": form})
+
+
+
+def seller_signup(request):
+    user = request.user
+
+    if request.method == "POST":
+        form = SellerSignupForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            seller = form.save(commit=False)
+            seller.user = user
+            seller.save()
+            logout(request)
+            return redirect("login")
+
+    else:
+        form = SellerSignupForm()
+
+    return render(request, "registration/seller_signup.html", {"form": form})
 
 
 def login_view(request):

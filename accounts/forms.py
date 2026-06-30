@@ -8,7 +8,6 @@ class UserSigninForm(UserCreationForm):
         
         
 from django import forms
-from .models import Buyer
 
 class BuyerSignupForm(forms.ModelForm):
     class Meta:
@@ -19,6 +18,16 @@ class BuyerSignupForm(forms.ModelForm):
             "birth_date": forms.DateInput(attrs={"type": "date"}),
         }
         
+
+class SellerSignupForm(forms.ModelForm):
+    class Meta:
+        model = Seller
+        fields = ["profile_picture", "shop_name", "gst_number", "is_gst_registered", "description"]
+
+        
+
+
+
 class LoginForm(forms.Form):
     identifier = forms.CharField(
         label="Username or Email"
