@@ -3,7 +3,6 @@ from accounts.models import Seller
 
 # Create your models here.
 class Product(models.Model):
-
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=128, unique=True, blank = True, null = True)
     brancd = models.CharField(max_length=64, blank = True, null = True)
@@ -12,7 +11,7 @@ class Product(models.Model):
     delivery_days = models.IntegerField(blank=True)
     category = models.CharField(max_length= 64, blank=True, null=True)
     hsn_code = models.ForeignKey("HSNCode",on_delete=models.PROTECT)  
-    
+
     def __str__(self):
         return self.product_name  
     
