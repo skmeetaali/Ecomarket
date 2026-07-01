@@ -15,3 +15,9 @@ def cart(request):
 def checkout(request):
     context = {}
     return render(request, "store/checkout.html", context)
+
+def seller_dashboard(request):
+    pass
+
+def buyer_dashboard(request):
+    pass

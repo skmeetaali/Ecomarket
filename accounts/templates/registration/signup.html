@@ -1,0 +1,82 @@
+{% extends "./main.html" %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+<form method="post" class="signup-form">
+    {% csrf_token %}
+
+    <!-- Hidden role field -->
+    <div style="display:none;">
+        {{ form.role }}
+    </div>
+
+    <h5 class="mb-3 text-center">Choose Account Type</h5>
+
+    <div class="role-selection">
+        <div class="role-card" data-role="BUYER">
+            <h4>Buyer</h4>
+            <p>Browse products and place orders.</p>
+        </div>
+
+        <div class="role-card" data-role="SELLER">
+            <h4>Seller</h4>
+            <p>List products and manage your store.</p>
+        </div>
+    </div>
+
+    <div class="form-error text-center">
+        {{ form.role.errors }}
+    </div>
+
+    <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.errors }}
+    </div>
+
+    <div class="form-group">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {{ form.email.errors }}
+    </div>
+
+    <div class="form-group">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        <div class="form-help">{{ form.password1.help_text }}</div>
+        {{ form.password1.errors }}
+    </div>
+
+    <div class="form-group">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+    </div>
+
+    <button type="submit" class="btn-submit">
+        Create Account
+    </button>
+</form>
+
+<script>
+const cards = document.querySelectorAll(".role-card");
+const roleField = document.getElementById("id_role");
+
+cards.forEach(card => {
+    card.addEventListener("click", () => {
+
+        cards.forEach(c => c.classList.remove("selected"));
+
+        card.classList.add("selected");
+
+        roleField.value = card.dataset.role;
+    });
+});
+</script>
+
+{% endblock %}

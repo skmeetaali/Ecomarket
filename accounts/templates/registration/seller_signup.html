@@ -1,0 +1,66 @@
+{% extends "./main.html" %}
+{% load static %}
+
+{% block title %}Seller Profile{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+<h3 class="text-center mb-4">Complete Your Seller Profile</h3>
+
+<form method="post" enctype="multipart/form-data" class="signup-form">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div class="form-error mb-3">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+    <div class="form-group">
+        {{ form.profile_picture.label_tag }}
+        {{ form.profile_picture }}
+        <div class="form-error">
+            {{ form.profile_picture.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.shop_name.label_tag }}
+        {{ form.shop_name }}
+        <div class="form-error">
+            {{ form.shop_name.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+        <div class="form-error">
+            {{ form.description.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.is_gst_registered }}
+        {{ form.is_gst_registered.label_tag }}
+        <div class="form-error">
+            {{ form.is_gst_registered.errors }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form.gst_number.label_tag }}
+        {{ form.gst_number }}
+        <div class="form-error">
+            {{ form.gst_number.errors }}
+        </div>
+    </div>
+
+    <button type="submit" class="btn-submit">
+        Create Seller Profile
+    </button>
+</form>
+
+{% endblock %}

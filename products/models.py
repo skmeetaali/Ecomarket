@@ -9,13 +9,18 @@ class Product(models.Model):
     price = models.FloatField(blank=True)
     description = models.CharField(max_length=1024)
     delivery_days = models.IntegerField(blank=True)
-    category = models.CharField(max_length= 64, blank = True, null = True)
+    category = models.CharField(max_length= 64, blank=True, null=True)
     hsn_code = models.ForeignKey("HSNCode",on_delete=models.PROTECT)  
-    
+
     def __str__(self):
         return self.product_name  
     
 class Product_picturs(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="pictures"
+    )
     picture = models.ImageField()
     is_default = models.BooleanField(default=False)
     
