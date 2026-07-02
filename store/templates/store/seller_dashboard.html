@@ -1,0 +1,271 @@
+{% extends "./main.html" %}
+
+{% block title %}
+Seller Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+
+    <div>
+        <h2>Your Products</h2>
+        <p class="text-muted mb-0">
+            {{ products.count }} Product{{ products.count|pluralize }}
+        </p>
+    </div>
+
+    <button
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#addProductModal">
+
+        + Add Product
+
+    </button>
+
+</div>
+
+<br>
+
+<div class="row g-4">
+
+{% for product in products %}
+
+<div class="col-lg-4 col-md-6">
+
+    <div class="card shadow-sm h-100">
+
+        {% with image=product.pictures.first %}
+            {% if image %}
+                <img src="{{ image.picture.url }}"
+                     class="card-img-top"
+                     style="height:220px; object-fit:cover;">
+            {% else %}
+                <img src="https://placehold.co/600x400?text=No+Image"
+                     class="card-img-top"
+                     style="height:220px; object-fit:cover;">
+            {% endif %}
+        {% endwith %}
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between">
+
+                <div>
+
+                    <h5 class="mb-1">
+                        {{ product.product_name }}
+                    </h5>
+
+                    <small class="text-muted">
+                        {{ product.brancd }}
+                    </small>
+
+                </div>
+
+                <div class="text-end">
+
+                    <span class="badge bg-secondary">
+                        {{ product.category }}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h4 class="text-success mb-0">
+                    ₹{{ product.price }}
+                </h4>
+
+                <small class="text-muted">
+                    {{ product.delivery_days }} days
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12">
+
+    <div class="alert alert-info">
+
+        You haven't listed any products yet.
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<!-- Add Product Modal -->
+
+<div
+    class="modal fade"
+    id="addProductModal"
+    tabindex="-1">
+
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+            <form
+                method="POST"
+                action="{% url 'add_product' %}"
+                enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Add Product
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <!-- Product Details -->
+
+                    <h6 class="mb-3">Product Details</h6>
+
+                    <div class="row">
+
+                        {% for field in product_form %}
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+                                {{ field.label }}
+                            </label>
+
+                            {{ field }}
+
+                            {% if field.errors %}
+                                <div class="text-danger small">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <hr>
+
+                    <!-- Product Images -->
+
+                    <h6 class="mb-3">Product Images</h6>
+
+                    {% for field in picture_form %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.errors %}
+                            <div class="text-danger small">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    {% endfor %}
+
+                    <!-- Image Preview -->
+
+                    <div
+                        id="preview"
+                        class="d-flex flex-wrap gap-3 mt-3">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        class="btn btn-primary"
+                        type="submit">
+
+                        Save Product
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const imageInput = document.getElementById("id_pictures");
+const preview = document.getElementById("preview");
+
+if (imageInput) {
+    imageInput.addEventListener("change", function () {
+
+        preview.innerHTML = "";
+
+        Array.from(this.files).forEach(file => {
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+
+                const img = document.createElement("img");
+
+                img.src = e.target.result;
+                img.style.width = "120px";
+                img.style.height = "120px";
+                img.style.objectFit = "cover";
+                img.className = "rounded border shadow-sm";
+
+                preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+
+        });
+
+    });
+}
+</script>
+{% endblock %}
