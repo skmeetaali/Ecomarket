@@ -175,35 +175,19 @@ Seller Dashboard
 
                     <!-- Product Images -->
 
-                    <h6 class="mb-3">Product Images</h6>
-
-                    {% for field in picture_form %}
-
                     <div class="mb-3">
+                        <label class="form-label">Product Images</label>
 
-                        <label class="form-label">
-                            {{ field.label }}
-                        </label>
-
-                        {{ field }}
-
-                        {% if field.errors %}
-                            <div class="text-danger small">
-                                {{ field.errors }}
-                            </div>
-                        {% endif %}
-
+                        <input
+                            type="file"
+                            name="pictures"
+                            id="id_pictures"
+                            class="form-control"
+                            accept="image/*"
+                            multiple>
                     </div>
 
-                    {% endfor %}
-
-                    <!-- Image Preview -->
-
-                    <div
-                        id="preview"
-                        class="d-flex flex-wrap gap-3 mt-3">
-                    </div>
-
+                    <div id="preview" class="d-flex flex-wrap gap-3 mt-3"></div>
                 </div>
 
                 <div class="modal-footer">

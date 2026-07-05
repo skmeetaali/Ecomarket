@@ -52,6 +52,9 @@ def seller_dashboard(request):
 @login_required
 def add_product(request):
 
+    print(request.POST)
+    print(request.FILES)
+
     if request.method != "POST":
         return redirect("seller_dashboard")
 
@@ -62,9 +65,10 @@ def add_product(request):
     seller = Seller.objects.get(user=request.user)
 
     product_form = ProductForm(request.POST)
-    picture_form = ProductPictureForm(request.POST, request.FILES)
 
-    if product_form.is_valid() and picture_form.is_valid():
+
+
+    if product_form.is_valid():
 
         product = product_form.save(commit=False)
         product.seller = seller
