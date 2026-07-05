@@ -9,10 +9,10 @@ from django.contrib import messages
 
 # Create your views here.
 
-def store(request):
+def buyer_dashboard(request):
     products = Product.objects.all()
     context = {'products': products}
-    return render(request, 'store/store.html', context)
+    return render(request, 'store/buyer_dashboard.html', context)
 
 def cart(request):
     context = {}
@@ -91,6 +91,3 @@ def add_product(request):
     messages.error(request, "Please correct the errors in the form.")
 
     return redirect("seller_dashboard")
-
-def buyer_dashboard(request):
-    pass
