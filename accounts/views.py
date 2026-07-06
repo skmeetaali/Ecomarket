@@ -105,3 +105,7 @@ def login_view(request):
     return render(request, "registration/login.html", {
         "form": form
     })
+    
+def user_logout(request):
+    logout(request)
+    return redirect("login")
