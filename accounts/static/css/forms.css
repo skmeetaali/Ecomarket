@@ -115,3 +115,11 @@
     color: #6c757d;
     font-size: .9rem;
 }
+
+textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: none;      /* Optional: prevent manual resizing */
+    overflow: hidden;  /* Hide scrollbar */
+    box-sizing: border-box;
+}

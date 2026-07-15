@@ -1,5 +1,6 @@
 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 from django.shortcuts import render, redirect
 from accounts.models import Seller
 from products.models import Product, Product_picturs
@@ -8,11 +9,13 @@ from django.contrib import messages
 
 
 # Create your views here.
-
+@never_cache
+@login_required
 def buyer_dashboard(request):
     products = Product.objects.all()
     context = {'products': products}
     return render(request, 'store/buyer_dashboard.html', context)
+
 
 def cart(request):
     context = {}
@@ -23,7 +26,7 @@ def checkout(request):
     return render(request, "store/checkout.html", context)
 
 
-
+@never_cache
 @login_required
 def seller_dashboard(request):
     # Ensure the logged-in user is a seller
