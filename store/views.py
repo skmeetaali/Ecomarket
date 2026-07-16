@@ -90,6 +90,8 @@ def add_product(request):
         messages.success(request, "Product added successfully.")
 
         return redirect("seller_dashboard")
+    else:
+        print(product_form.errors)
 
     messages.error(request, "Please correct the errors in the form.")
 
