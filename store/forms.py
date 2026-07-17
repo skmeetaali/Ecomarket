@@ -58,6 +58,8 @@ class ProductPictureForm(forms.Form):
                 "accept": "image/*",
             }
         ),
-        upload_to="products/",
         required=False,
     )
+    
+    
+    

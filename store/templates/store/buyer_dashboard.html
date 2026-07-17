@@ -17,7 +17,7 @@ Seller Dashboard
 
         {% with image=product.pictures.first %}
             {% if image %}
-                <img src="static/images/{{ image.picture.url }}"
+                <img src="{{ image.picture.url }}"
                      class="card-img-top"
                      style="height:220px; object-fit:cover;">
             {% else %}
