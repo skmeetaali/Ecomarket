@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'cart',
     'wishlist',
     'basket',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -171,3 +172,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+import os
+
+RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID", "")
+RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET", "")
