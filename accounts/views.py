@@ -67,15 +67,26 @@ def login(request):
         status=status.HTTP_400_BAD_REQUEST,
     )
 
+from rest_framework.decorators import (
+    api_view,
+    permission_classes,
+)
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def logout(request):
+    print("User:", request.user)
+    print("Authenticated:", request.user.is_authenticated)
+    print("Auth:", request.auth)
     request.auth.delete()
 
     return Response(
-        {'message': 'Logout successful.'},
-        status=status.HTTP_200_OK,
+        {"message": "Logged out successfully."},
+        status=status.HTTP_200_OK
     )
     
     
